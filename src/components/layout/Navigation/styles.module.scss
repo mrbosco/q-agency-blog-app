@@ -1,0 +1,52 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+
+    li {
+      a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 400;
+
+        &:hover {
+          transition: color 0.2s ease-in-out;
+          color: #8ceead;
+        }
+      }
+    }
+  }
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.8rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+
+  span {
+    vertical-align: middle;
+    padding: 0 0.2rem;
+    animation: blink 2s linear infinite;
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
