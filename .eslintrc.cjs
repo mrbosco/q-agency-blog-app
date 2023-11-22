@@ -24,6 +24,14 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        'react/prop-types': 'off',
+      },
+    },
+  ],
   settings: {
     react: {
       version: 'detect',
