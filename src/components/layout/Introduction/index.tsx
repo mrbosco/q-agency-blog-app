@@ -1,6 +1,9 @@
+import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
 
 const Introduction = () => {
+  useGreeting('Introduction');
+
   return (
     <div className={styles.introduction}>
       <span>👋 WELCOME</span>

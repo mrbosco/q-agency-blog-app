@@ -1,14 +1,23 @@
+import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
 
 interface PostCardProps {
+  id: number;
   author: string;
   title: string;
   summary: string;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ author, title, summary }) => {
+const PostCard: React.FC<PostCardProps> = ({ id, author, title, summary }) => {
+  useGreeting('PostCard');
+
   return (
-    <article className={styles.postCard}>
+    <article
+      className={styles.postCard}
+      onClick={() => {
+        console.log('You clicked on post with id', id);
+      }}
+    >
       <section className={styles.postCardContent}>
         <span>by {author}</span>
         <h2>{title}</h2>
@@ -16,7 +25,7 @@ const PostCard: React.FC<PostCardProps> = ({ author, title, summary }) => {
       </section>
       <figure className={styles.postCardImage}>
         <img
-          src="https://placehold.co/300x210?text=Hello+World"
+          src={`https://picsum.photos/300/210?t=${Date.now() + id}`}
           alt="Post Cover Photo"
           loading="lazy"
         />

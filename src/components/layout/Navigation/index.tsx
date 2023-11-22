@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Routes } from './routes';
+import { useGreeting } from '@/hooks/useGreeting';
 
 const Navigation = () => {
+  useGreeting('Navigation');
+
   return (
     <nav className={styles.navigation}>
       <Link className={styles.logo} to={Routes.HOME}>
