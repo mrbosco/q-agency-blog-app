@@ -1,0 +1,23 @@
+.customInput {
+  display: flex;
+  padding: 1rem 1.3rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 5%);
+  border: 1px solid transparent;
+  outline: none;
+  width: 100%;
+  color: #232e52;
+  font-weight: 600;
+
+  &:focus {
+    background-color: #e7fcee;
+    border: 1px solid #8ceead;
+  }
+
+  &::placeholder {
+    color: #232e52;
+    opacity: 0.5;
+    font-weight: 400;
+    font-family: Rubik;
+  }
+}

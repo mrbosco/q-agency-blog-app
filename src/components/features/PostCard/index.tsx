@@ -2,6 +2,7 @@ import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
 import { Comment } from '@/types';
 import Comments from '../Comments';
+import React from 'react';
 
 interface PostCardProps {
   id: number;
@@ -46,4 +47,6 @@ const PostCard: React.FC<PostCardProps> = ({
   );
 };
 
-export default PostCard;
+const MemoizedPostCard = React.memo(PostCard);
+
+export default MemoizedPostCard;

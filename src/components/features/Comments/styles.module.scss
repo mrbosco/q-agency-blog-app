@@ -1,14 +1,13 @@
 .commentsList {
   list-style: none;
-  padding: 1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
-  margin-top: -2rem;
 
   li {
     color: #232e52;
-    font-size: 0.9rem;
+
+    font-size: 0.8rem;
     font-weight: 300;
     line-height: 150%;
     background-color: #f8faff;
@@ -44,5 +43,5 @@
   font-size: 0.8125rem;
   font-weight: 400;
   text-transform: uppercase;
-  padding: 1rem;
+  margin-top: 1rem;
 }
