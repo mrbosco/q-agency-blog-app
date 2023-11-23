@@ -1,3 +1,4 @@
+import { cacheManager } from '@/utils/CacheManager';
 import { useState, useEffect } from 'react';
 
 export const useFetch = <T,>(
@@ -5,16 +6,19 @@ export const useFetch = <T,>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transformData?: (data: any) => Promise<T>
 ) => {
-  const [data, setData] = useState<T | null>(null);
+  const cachedData = cacheManager.get(url);
+  const [data, setData] = useState<T | null>(cachedData || null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    if (cachedData) return;
+
     const fetchData = async () => {
-      setIsLoading(true);
       setError(null);
 
       try {
+        setIsLoading(true);
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -27,6 +31,7 @@ export const useFetch = <T,>(
         }
 
         setData(jsonData);
+        cacheManager.set(url, jsonData);
       } catch (err) {
         setError(err as Error);
       } finally {
@@ -35,7 +40,7 @@ export const useFetch = <T,>(
     };
 
     fetchData();
-  }, [url, transformData]);
+  }, [url, transformData, cachedData]);
 
   return { data, isLoading, error };
 };

@@ -43,3 +43,27 @@ export const fetchPostsAndRelations = () => {
     transform: transformPostsAndRelations,
   };
 };
+
+const transformPostAndRelations = async (
+  data: any
+): Promise<PostsAndRelations> => {
+  try {
+    const commentsResponse = await fetch(fetchCommentsByPostId(data.id).url);
+    const comments: Comment[] = await commentsResponse.json();
+
+    const userResponse = await fetch(fetchUserById(data.userId).url);
+    const user: User = await userResponse.json();
+
+    return { ...data, comments, user };
+  } catch (error) {
+    console.error('Error fetching post relations:', error);
+    throw error;
+  }
+};
+
+export const fetchPostAndRelations = (id: number) => {
+  return {
+    url: `https://jsonplaceholder.typicode.com/posts/${id}`,
+    transform: transformPostAndRelations,
+  };
+};

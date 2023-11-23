@@ -7,8 +7,10 @@ import { PostsAndRelations } from '@/types';
 import styles from './styles.module.scss';
 import { useDebounce } from '@/hooks/useDebounce';
 import Input from '@/components/common/Input';
+import { useIntroduction } from '@/hooks/useIntroduction';
 
-export const Posts = () => {
+export const Posts: React.FC = () => {
+  const { setIntroduction } = useIntroduction();
   const { url, transform } = fetchPostsAndRelations();
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 750);
@@ -19,6 +21,13 @@ export const Posts = () => {
   } = useFetch<PostsAndRelations[]>(url, transform);
 
   const [filteredPosts, setFilteredPosts] = useState<PostsAndRelations[]>([]);
+
+  useEffect(() => {
+    setIntroduction({
+      title: 'Insights about my personal and work life, and the in-betweens',
+      subtitle: '👋 WELCOME',
+    });
+  }, [setIntroduction]);
 
   useEffect(() => {
     setFilteredPosts(
@@ -48,13 +57,19 @@ export const Posts = () => {
     return filteredPosts.length ? (
       filteredPosts.map((post, index) => (
         <React.Fragment key={post.id}>
-          <PostCard
-            id={post.id}
-            title={post.title}
-            summary={post.body}
-            comments={post.comments}
-            author={post.user.name}
-          />
+          <PostCard id={post.id}>
+            <PostCard.Content
+              author={post.user.name}
+              title={post.title}
+              summary={post.body}
+            />
+            <PostCard.Image
+              src={`https://picsum.photos/300/210?t=${Date.now() + post.id}`}
+              alt="Post Cover Photo"
+            />
+            <PostCard.Comments comments={post.comments} />
+          </PostCard>
+
           {index !== filteredPosts.length - 1 && <hr />}
         </React.Fragment>
       ))

@@ -1,51 +1,70 @@
-import React from 'react';
+import React, { createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
-import { Comment } from '@/types';
-import LatestComments from '../LatestComments';
+import LatestComments from '@/components/features/LatestComments';
+import {
+  PostCardCommentsProps,
+  PostCardComponent,
+  PostCardContentProps,
+  PostCardContextProps,
+  PostCardImageProps,
+  PostCardProps,
+} from './PostCard.types';
 
-interface PostCardProps {
-  id: number;
-  author?: string;
-  title: string;
-  summary: string;
-  comments?: Comment[];
-}
+const PostCardContext = createContext<PostCardContextProps | undefined>(
+  undefined
+);
 
-const PostCard: React.FC<PostCardProps> = ({
-  id,
+const PostCardContent: React.FC<PostCardContentProps> = ({
   author,
   title,
   summary,
-  comments,
-}) => {
-  useGreeting('PostCard');
+}) => (
+  <section className={styles.postCardContent}>
+    {author && <span>by {author}</span>}
+    {title && <h2>{title}</h2>}
+    <p>{summary}</p>
+  </section>
+);
 
-  const handleArticleClick = () => {
-    console.log('You clicked on post with id', id);
-  };
+const PostCardImage: React.FC<PostCardImageProps> = ({ src, alt }) => (
+  <figure className={styles.postCardImage}>
+    <img src={src} alt={alt} loading="lazy" />
+  </figure>
+);
+
+const PostCardComments: React.FC<PostCardCommentsProps> = ({ comments }) =>
+  comments ? <LatestComments comments={comments} /> : null;
+
+const PostCardBase: React.FC<PostCardProps> = ({ id, children }) => {
+  useGreeting('PostCard');
+  const navigate = useNavigate();
+
+  const contentChildren = React.Children.toArray(children).filter(
+    (child) => React.isValidElement(child) && child.type !== PostCardComments
+  );
+
+  const commentsChildren = React.Children.toArray(children).filter(
+    (child) => React.isValidElement(child) && child.type === PostCardComments
+  );
 
   return (
-    <>
-      <article className={styles.postCard} onClick={handleArticleClick}>
-        <section className={styles.postCardContent}>
-          {author && <span>by {author}</span>}
-          <h2>{title}</h2>
-          <p>{summary}</p>
-        </section>
-        <figure className={styles.postCardImage}>
-          <img
-            src={`https://picsum.photos/300/210?t=${Date.now() + id}`}
-            alt="Post Cover Photo"
-            loading="lazy"
-          />
-        </figure>
+    <PostCardContext.Provider value={{ id }}>
+      <article
+        className={styles.postCard}
+        onClick={() => navigate(`/post/${id}`)}
+      >
+        <div>{contentChildren}</div>
+        {commentsChildren}
       </article>
-      {comments && <LatestComments comments={comments} />}
-    </>
+    </PostCardContext.Provider>
   );
 };
 
-const MemoizedPostCard = React.memo(PostCard);
+const PostCard = React.memo(PostCardBase) as unknown as PostCardComponent;
+PostCard.Content = PostCardContent;
+PostCard.Image = PostCardImage;
+PostCard.Comments = PostCardComments;
 
-export default MemoizedPostCard;
+export default PostCard;
