@@ -1,6 +1,6 @@
 import React from 'react';
 import PostCard from '@/components/features/PostCard';
-import Spinner from '@/components/layout/Spinner';
+import Spinner from '@/components/common/Spinner';
 import { useFetch } from '@/hooks/useFetch';
 import { fetchPostsAndRelations } from '@/services/apiPosts';
 import { PostsAndRelations } from '@/types';

@@ -1,0 +1,48 @@
+.commentsList {
+  list-style: none;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin-top: -2rem;
+
+  li {
+    color: #232e52;
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 150%;
+    background-color: #f8faff;
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+}
+
+.commentAuthor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+
+  h4 {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    line-height: normal;
+  }
+
+  img {
+    background-color: #ebf2fe;
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+}
+
+.commentsHeader {
+  color: lightgray;
+  text-align: right;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 1rem;
+}
