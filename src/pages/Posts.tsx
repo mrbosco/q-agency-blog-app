@@ -11,7 +11,7 @@ import Input from '@/components/common/Input';
 export const Posts = () => {
   const { url, transform } = fetchPostsAndRelations();
   const [searchTerm, setSearchTerm] = useState('');
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 750);
   const {
     data: posts,
     isLoading,

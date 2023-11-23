@@ -1,8 +1,8 @@
+import React from 'react';
 import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
 import { Comment } from '@/types';
-import Comments from '../Comments';
-import React from 'react';
+import LatestComments from '../LatestComments';
 
 interface PostCardProps {
   id: number;
@@ -21,14 +21,13 @@ const PostCard: React.FC<PostCardProps> = ({
 }) => {
   useGreeting('PostCard');
 
+  const handleArticleClick = () => {
+    console.log('You clicked on post with id', id);
+  };
+
   return (
     <>
-      <article
-        className={styles.postCard}
-        onClick={() => {
-          console.log('You clicked on post with id', id);
-        }}
-      >
+      <article className={styles.postCard} onClick={handleArticleClick}>
         <section className={styles.postCardContent}>
           {author && <span>by {author}</span>}
           <h2>{title}</h2>
@@ -42,7 +41,7 @@ const PostCard: React.FC<PostCardProps> = ({
           />
         </figure>
       </article>
-      {comments && <Comments comments={comments} />}
+      {comments && <LatestComments comments={comments} />}
     </>
   );
 };
