@@ -5,6 +5,11 @@ export interface Post {
   body: string;
 }
 
+export interface PostsAndRelations extends Post {
+  comments: Comment[];
+  user: User;
+}
+
 export interface Comment {
   id: number;
   postId: number;

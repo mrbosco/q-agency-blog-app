@@ -20,7 +20,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.19.0"
+    "react-router-dom": "^6.19.0",
+    "vite-plugin-static-copy": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.9.3",
@@ -46,6 +47,7 @@
     "stylelint-scss": "^5.3.1",
     "typescript": "^5.0.2",
     "vite": "^5.0.0",
-    "vite-plugin-eslint": "^1.8.1"
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-pwa": "^0.17.0"
   }
 }

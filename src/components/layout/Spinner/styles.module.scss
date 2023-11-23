@@ -1,0 +1,19 @@
+.spinner {
+  margin: 2rem auto;
+  width: 10rem;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  background:
+    radial-gradient(farthest-side, #232e52 94%, #0000) top/10px 10px no-repeat,
+    conic-gradient(#0000 30%, #232e52);
+  animation: rotate 1.5s infinite linear;
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}

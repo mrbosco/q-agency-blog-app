@@ -1,18 +1,45 @@
-import { Post } from '@/types';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Post, PostsAndRelations, User } from '@/types';
+import { fetchCommentsByPostId } from './apiComments';
+import { fetchUserById } from './apiUsers';
+export const fetchPosts = () => {
+  return {
+    url: 'https://jsonplaceholder.typicode.com/posts',
+    transform: (data: any): Post[] => {
+      return data;
+    },
+  };
+};
 
-export const fetchPosts = async (): Promise<Post[]> => {
-  try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+const transformPostsAndRelations = async (
+  data: any[]
+): Promise<PostsAndRelations[]> => {
+  const postsWithComments = await Promise.all(
+    data.map(async (post) => {
+      try {
+        const commentsResponse = await fetch(
+          fetchCommentsByPostId(post.id).url
+        );
+        const comments: Comment[] = await commentsResponse.json();
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+        const userResponse = await fetch(fetchUserById(post.userId).url);
+        const user: User = await userResponse.json();
 
-    const data = await response.json();
+        return { ...post, comments, user };
+      } catch (error) {
+        console.error('Error fetching post relations:', error);
+      }
+    })
+  );
 
-    return data;
-  } catch (error) {
-    console.error('Error fetching posts:', error);
-    return [];
-  }
+  return postsWithComments.filter(
+    (post) => post !== null
+  ) as PostsAndRelations[];
+};
+
+export const fetchPostsAndRelations = () => {
+  return {
+    url: 'https://jsonplaceholder.typicode.com/posts',
+    transform: transformPostsAndRelations,
+  };
 };

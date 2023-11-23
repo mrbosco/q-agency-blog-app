@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import eslint from 'vite-plugin-eslint';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -9,7 +10,18 @@ const currentDir = (metaUrl: string): string => {
 };
 
 export default defineConfig({
-  plugins: [react(), eslint()],
+  plugins: [
+    react(),
+    eslint(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: './public/service-worker.js',
+          dest: './',
+        },
+      ],
+    }),
+  ],
   server: {
     watch: {
       usePolling: true,

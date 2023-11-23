@@ -1,14 +1,27 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
+import { Comment, User } from '@/types';
+import { fetchCommentsByPostId } from '@/services/apiComments';
+import { useFetch } from '@/hooks/useFetch';
+import Spinner from '@/components/layout/Spinner';
+import { fetchUserById } from '@/services/apiUsers';
 
 interface PostCardProps {
   id: number;
   author: string;
   title: string;
   summary: string;
+  comments?: Comment[];
 }
 
-const PostCard: React.FC<PostCardProps> = ({ id, author, title, summary }) => {
+const PostCard: React.FC<PostCardProps> = ({
+  id,
+  author,
+  title,
+  summary,
+  comments,
+}) => {
   useGreeting('PostCard');
 
   return (
@@ -22,6 +35,8 @@ const PostCard: React.FC<PostCardProps> = ({ id, author, title, summary }) => {
         <span>by {author}</span>
         <h2>{title}</h2>
         <p>{summary}</p>
+        {comments &&
+          comments.map((comment) => <p key={comment.id}>{comment.body}</p>)}
       </section>
       <figure className={styles.postCardImage}>
         <img
