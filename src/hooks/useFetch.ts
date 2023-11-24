@@ -1,7 +1,7 @@
 import { cacheManager } from '@/utils/CacheManager';
 import { useState, useEffect } from 'react';
 
-export const useFetch = <T,>(
+export const useFetch = <T>(
   url: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transformData?: (data: any) => Promise<T>

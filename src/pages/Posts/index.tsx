@@ -64,7 +64,7 @@ export const Posts: React.FC = () => {
               summary={post.body}
             />
             <PostCard.Image
-              src={`https://picsum.photos/300/210?t=${Date.now() + post.id}`}
+              src={`https://picsum.photos/300/210?t=${post.id}`}
               alt="Post Cover Photo"
             />
             <PostCard.Comments comments={post.comments} />

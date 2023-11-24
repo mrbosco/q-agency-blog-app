@@ -1,23 +1,28 @@
+@import '@/styles/colors';
+@import '@/styles/typography';
+@import '@/styles/spacings';
+@import '@/styles/tokens';
+
 .customInput {
   display: flex;
-  padding: 1rem 1.3rem;
-  border-radius: 0.5rem;
+  padding: $spacing-default $spacing-xl;
+  border-radius: $rounded-lg;
   box-shadow: 0px 15px 30px 0px rgba(0, 0, 0, 5%);
   border: 1px solid transparent;
   outline: none;
   width: 100%;
-  color: #232e52;
-  font-weight: 600;
+  color: $text-blue-dark;
+  font-weight: $font-medium;
 
   &:focus {
-    background-color: #e7fcee;
-    border: 1px solid #8ceead;
+    background-color: $text-green-light;
+    border: 1px solid $text-green;
   }
 
   &::placeholder {
-    color: #232e52;
+    color: $text-blue-dark;
     opacity: 0.5;
-    font-weight: 400;
+    font-weight: $font-normal;
     font-family: Rubik;
   }
 }

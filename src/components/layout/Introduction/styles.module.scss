@@ -1,31 +1,40 @@
+@import '@/styles/colors';
+@import '@/styles/typography';
+@import '@/styles/spacings';
+@import '@/styles/tokens';
+
 .introduction {
   width: 80%;
   margin: 0 auto;
   padding-top: 11rem;
-  padding-bottom: 8.94rem;
+  padding-bottom: calc($spacing-3xl + $spacing-4xl);
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.25rem;
+  gap: $spacing-lg;
 
   span {
-    color: #fff;
+    color: $text-white;
 
     text-align: center;
-    font-size: 1rem;
+    font-size: $text-base;
     font-style: normal;
-    font-weight: 400;
-    line-height: 120%; /* 1.2rem */
+    font-weight: $font-normal;
+    line-height: $leading-relaxed;
     text-transform: uppercase;
   }
 
   h1 {
-    color: #fff;
+    color: $text-white;
 
-    font-size: 3.25rem;
+    font-size: $text-3xl;
     font-style: normal;
-    font-weight: 500;
+    font-weight: $font-medium;
     letter-spacing: -0.0975rem;
+
+    @media (max-width: $screen-mobile) {
+      font-size: $text-2xl;
+    }
   }
 }

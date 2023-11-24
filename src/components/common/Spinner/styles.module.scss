@@ -1,11 +1,16 @@
+@import '@/styles/colors';
+@import '@/styles/spacings';
+@import '@/styles/tokens';
+
 .spinner {
-  margin: 2rem auto;
-  width: 10rem;
+  margin: $spacing-2xl auto;
+  width: calc($spacing-4xl * 2);
   aspect-ratio: 1;
-  border-radius: 100%;
+  border-radius: $rounded-full;
   background:
-    radial-gradient(farthest-side, #232e52 94%, #0000) top/10px 10px no-repeat,
-    conic-gradient(#0000 30%, #232e52);
+    radial-gradient(farthest-side, $text-blue-dark 94%, #0000) top/10px 10px
+      no-repeat,
+    conic-gradient(#0000 30%, $text-blue-dark);
   animation: rotate 1.5s infinite linear;
 
   @keyframes rotate {

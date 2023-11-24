@@ -1,3 +1,4 @@
+import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
 import { Comment } from '@/types';
 
@@ -6,6 +7,8 @@ interface CommentProps {
 }
 
 const SingleConment: React.FC<CommentProps> = ({ comment }) => {
+  useGreeting('SingleComment');
+
   return (
     <div>
       <div className={styles.commentAuthor}>

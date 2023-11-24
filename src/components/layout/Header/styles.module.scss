@@ -1,6 +1,10 @@
+@import '@/styles/colors';
+@import '@/styles/spacings';
+@import '@/styles/tokens';
+
 .header {
-  border-radius: 0.625rem;
-  background: #232e52;
-  padding: 2.5rem 5rem;
-  color: #fff;
+  border-radius: $rounded-xl;
+  background: $bg-blue-dark;
+  padding: $spacing-2xl $spacing-3xl;
+  color: $text-white;
 }

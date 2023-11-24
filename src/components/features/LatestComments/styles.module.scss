@@ -1,26 +1,41 @@
+@import '@/styles/colors';
+@import '@/styles/typography';
+@import '@/styles/spacings';
+@import '@/styles/tokens';
+
 .commentsList {
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
+  gap: $spacing-default;
 
   li {
-    color: #232e52;
+    color: $text-blue-dark;
 
-    font-size: 0.8rem;
-    font-weight: 300;
-    line-height: 150%;
-    background-color: #f8faff;
-    border-radius: 1rem;
-    padding: 1rem;
+    font-size: $text-xs;
+    font-weight: $font-light;
+    line-height: $leading-loose;
+    background-color: $text-blue-faded;
+    border-radius: $rounded-2xl;
+    padding: $spacing-default;
+  }
+
+  @media (max-width: $screen-mobile) {
+    grid-template-columns: 1fr;
+    order: 4;
   }
 }
 
 .commentsHeader {
-  color: lightgray;
+  color: $text-gray;
   text-align: right;
-  font-size: 0.8125rem;
-  font-weight: 400;
+  font-size: $text-sm;
+  font-weight: $font-normal;
   text-transform: uppercase;
-  margin: 1rem 0;
+  margin: $spacing-default 0;
+
+  @media (max-width: $screen-mobile) {
+    grid-template-columns: 1fr;
+    order: 3;
+  }
 }

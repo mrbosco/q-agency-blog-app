@@ -22,6 +22,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.19.0",
+    "ts-pattern": "^5.0.5",
     "vite-plugin-static-copy": "^1.0.0"
   },
   "devDependencies": {

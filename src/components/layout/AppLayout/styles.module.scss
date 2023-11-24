@@ -1,12 +1,23 @@
+@import '@/styles/spacings';
+@import '@/styles/tokens';
+
 .appLayout {
-  padding: 1.88rem;
+  padding: $spacing-xl;
 
   main {
-    max-width: 60rem;
+    max-width: $default-main-width;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    padding-top: 3.5rem;
-    gap: 3.5rem;
+    padding-top: $spacing-3xl;
+    gap: $spacing-3xl;
+
+    @media (min-width: $screen-2k) {
+      max-width: $maximum-main-width;
+    }
+  }
+
+  @media (max-width: $screen-mobile) {
+    padding: $spacing-md;
   }
 }

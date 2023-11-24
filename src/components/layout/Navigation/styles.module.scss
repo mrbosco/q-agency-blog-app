@@ -1,3 +1,7 @@
+@import '@/styles/colors';
+@import '@/styles/typography';
+@import '@/styles/spacings';
+
 .navigation {
   display: flex;
   justify-content: space-between;
@@ -5,18 +9,18 @@
 
   ul {
     display: flex;
-    gap: 1.5rem;
+    gap: $spacing-lg;
     list-style: none;
 
     li {
       a {
-        color: #fff;
+        color: $text-white;
         text-decoration: none;
-        font-weight: 400;
+        font-weight: $font-normal;
 
         &:hover {
           transition: color 0.2s ease-in-out;
-          color: #8ceead;
+          color: $text-green;
         }
       }
     }
@@ -24,15 +28,14 @@
 }
 
 .logo {
-  font-weight: 800;
-  font-size: 1.8rem;
+  font-weight: $font-extrabold;
+  font-size: $text-xl;
   cursor: pointer;
   text-decoration: none;
-  color: #fff;
+  color: $text-white;
 
   span {
     vertical-align: middle;
-    padding: 0 0.2rem;
     animation: blink 2s linear infinite;
   }
 

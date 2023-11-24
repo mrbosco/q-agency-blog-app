@@ -1,20 +1,24 @@
+@import '@/styles/colors';
+@import '@/styles/typography';
+@import '@/styles/spacings';
+@import '@/styles/tokens';
+
 .commentAuthor {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: $spacing-default;
   margin-bottom: 0.5rem;
 
   h4 {
     text-transform: uppercase;
-    font-size: 0.8rem;
-    line-height: normal;
+    font-size: $text-xs;
   }
 
   img {
-    background-color: #ebf2fe;
-    width: 2rem;
-    height: 2rem;
+    background-color: $text-blue-light;
+    width: $spacing-xl;
+    height: $spacing-xl;
     object-fit: cover;
-    border-radius: 100%;
+    border-radius: $rounded-full;
   }
 }
