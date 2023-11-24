@@ -1,14 +1,23 @@
 import styles from './styles.module.scss';
 import SingleComment from '@/components/features/Comment';
-import { useGreeting } from '@/hooks/useGreeting';
+import { withLogging } from '@/components/hoc/withLogging';
 import { Comment } from '@/types';
+import { useEffect } from 'react';
+
+const componentName = 'LatestComments';
 
 interface LatestCommentsProps {
   comments: Comment[];
+  message?: string;
 }
 
-const LatestComments: React.FC<LatestCommentsProps> = ({ comments }) => {
-  useGreeting('LatestComments');
+const LatestComments: React.FC<LatestCommentsProps> = ({
+  message,
+  comments,
+}) => {
+  useEffect(() => {
+    console.log(`${message} ${componentName}`);
+  }, [message]);
 
   return (
     <>
@@ -24,4 +33,5 @@ const LatestComments: React.FC<LatestCommentsProps> = ({ comments }) => {
   );
 };
 
-export default LatestComments;
+const LatestCommentsWithLogging = withLogging(LatestComments);
+export default LatestCommentsWithLogging;

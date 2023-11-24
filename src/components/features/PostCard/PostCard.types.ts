@@ -23,6 +23,7 @@ export interface PostCardCommentsProps {
 export interface PostCardProps {
   id: number;
   children?: ReactNode;
+  message?: string;
 }
 
 export interface PostCardComponent extends React.FC<PostCardProps> {

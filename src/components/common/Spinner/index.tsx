@@ -1,9 +1,16 @@
-import { useGreeting } from '@/hooks/useGreeting';
+import { useEffect } from 'react';
 import styles from './styles.module.scss';
+import { withLogging } from '@/components/hoc/withLogging';
 
-const Spinner = () => {
-  useGreeting('Spinner');
+const componentName = 'Spinner';
+
+const Spinner: React.FC<{ message?: string }> = ({ message }) => {
+  useEffect(() => {
+    console.log(`${message} ${componentName}`);
+  }, [message]);
+
   return <div className={styles.spinner}></div>;
 };
 
-export default Spinner;
+const SpinnerWithLogging = withLogging(Spinner);
+export default SpinnerWithLogging;

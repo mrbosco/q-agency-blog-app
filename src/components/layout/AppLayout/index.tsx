@@ -1,11 +1,16 @@
 import { Outlet } from 'react-router-dom';
 import Header from '@/components/layout/Header';
-import { useGreeting } from '@/hooks/useGreeting';
 
 import styles from './styles.module.scss';
+import { withLogging } from '@/components/hoc/withLogging';
+import { useEffect } from 'react';
 
-const AppLayout: React.FC = () => {
-  useGreeting('AppLayout');
+const componentName = 'AppLayout';
+
+const AppLayout: React.FC<{ message?: string }> = ({ message }) => {
+  useEffect(() => {
+    console.log(`${message} ${componentName}`);
+  }, [message]);
 
   return (
     <div className={styles.appLayout}>
@@ -17,4 +22,5 @@ const AppLayout: React.FC = () => {
   );
 };
 
-export default AppLayout;
+const AppLayoutWithLogging = withLogging(AppLayout);
+export default AppLayoutWithLogging;

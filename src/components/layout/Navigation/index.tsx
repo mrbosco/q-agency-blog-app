@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { Routes } from './routes';
-import { useGreeting } from '@/hooks/useGreeting';
+import { useEffect } from 'react';
+import { withLogging } from '@/components/hoc/withLogging';
 
-const Navigation = () => {
-  useGreeting('Navigation');
+const componentName = 'Navigation';
+
+const Navigation: React.FC<{ message?: string }> = ({ message }) => {
+  useEffect(() => {
+    console.log(`${message} ${componentName}`);
+  }, [message]);
 
   return (
     <nav className={styles.navigation}>
@@ -20,4 +25,5 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+const NavigationWithLogging = withLogging(Navigation);
+export default NavigationWithLogging;

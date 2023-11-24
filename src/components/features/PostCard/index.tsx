@@ -1,6 +1,5 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGreeting } from '@/hooks/useGreeting';
 import styles from './styles.module.scss';
 import LatestComments from '@/components/features/LatestComments';
 import {
@@ -11,6 +10,9 @@ import {
   PostCardImageProps,
   PostCardProps,
 } from './PostCard.types';
+import { withLogging } from '@/components/hoc/withLogging';
+
+const componentName = 'PostCard';
 
 const PostCardContext = createContext<PostCardContextProps | undefined>(
   undefined
@@ -37,9 +39,12 @@ const PostCardImage: React.FC<PostCardImageProps> = ({ src, alt }) => (
 const PostCardComments: React.FC<PostCardCommentsProps> = ({ comments }) =>
   comments ? <LatestComments comments={comments} /> : null;
 
-const PostCardBase: React.FC<PostCardProps> = ({ id, children }) => {
-  useGreeting('PostCard');
+const PostCardBase: React.FC<PostCardProps> = ({ id, children, message }) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(`${message} ${componentName}`);
+  }, [message]);
 
   const contentChildren = React.Children.toArray(children).filter(
     (child) => React.isValidElement(child) && child.type !== PostCardComments
@@ -62,7 +67,9 @@ const PostCardBase: React.FC<PostCardProps> = ({ id, children }) => {
   );
 };
 
-const PostCard = React.memo(PostCardBase) as unknown as PostCardComponent;
+const PostCard = React.memo(
+  withLogging(PostCardBase)
+) as unknown as PostCardComponent;
 PostCard.Content = PostCardContent;
 PostCard.Image = PostCardImage;
 PostCard.Comments = PostCardComments;

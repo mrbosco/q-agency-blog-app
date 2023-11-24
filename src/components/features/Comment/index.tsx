@@ -1,13 +1,19 @@
-import { useGreeting } from '@/hooks/useGreeting';
+import { useEffect } from 'react';
 import styles from './styles.module.scss';
-import { Comment } from '@/types';
+import { Comment as CommentType } from '@/types';
+import { withLogging } from '@/components/hoc/withLogging';
+
+const componentName = 'Comment';
 
 interface CommentProps {
-  comment: Comment;
+  comment: CommentType;
+  message?: string;
 }
 
-const SingleConment: React.FC<CommentProps> = ({ comment }) => {
-  useGreeting('SingleComment');
+const Comment: React.FC<CommentProps> = ({ message, comment }) => {
+  useEffect(() => {
+    console.log(`${message} ${componentName}`);
+  }, [message]);
 
   return (
     <div>
@@ -23,4 +29,5 @@ const SingleConment: React.FC<CommentProps> = ({ comment }) => {
   );
 };
 
-export default SingleConment;
+const CommentWithLogging = withLogging(Comment);
+export default CommentWithLogging;
